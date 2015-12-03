@@ -1,0 +1,63 @@
+/*README
+*Ying Lu ylu6@wpi.edu
+*/
+
+This is problem 2 of project 3 in Operating Systems.
+
+Taming Massachusetts Drivers
+
+After years of accidents and high car insurance premiums, the state government has decided that they should
+actually enforce traffic laws instead of letting the Massachusetts drivers decide whose turn it is to go at an
+intersection. Apparently, these drivers were under the false impression that it was always their turn to go.
+The governor has charged you with designing a more efficient (and safe) intersection. As a starting point, he
+has suggested replacing all drivers with autonomous vehicles. However, it’s up to us to write the intersection
+protocol for these vehicles.
+
+For the purposes of this problem we will model the intersection as shown above, dividing it into quarters and
+identifying each quarter by its nearest map directions. We assume that the drivers, even the Massachusetts
+ones, drive on the right side of the road and do not perform U-turns in the intersection. When using the
+intersection, a driver will use 1-3 quadrants, based on the type of use. For example, if a car approaches from
+the North, depending on where it is going, it proceeds through the intersection as follows:
+	Right: NW quadrant only
+	Straight: NW, then SW quadrant
+	Left: NW, then SW, then SE quadrants
+
+---------------------------------------------
+run make to compile
+run ./main to run program
+---------------------------------------------
+digit representation:
+(from)
+NW==0
+SW==1
+SE==2
+NE==3
+
+(to)
+right==1
+straight==2
+left==3
+
+---------------------------------------------
+no cars can be in the same region at the same time.
+See explanation in problem2_explanation.txt
+
+drivers can not pass each other going the same way 
+unless they drive ambulances or motorcades because 
+the queue follows FIFO.
+
+when a car is entering the next state, it skips 
+to the second place of the queue to avoid starving
+situation.
+
+when an emergency or a motorcade comes up, it 
+goes directly to the front of the queue.
+
+a car checks only its next step, so it will not block
+regions that it is not using now or next.
+
+seg faults or infinite loops might occur after running 
+in while(1) mode for a certain amount of time
+
+----------------------------------------------------
+Thank you for your time and happy Chinese New Year!

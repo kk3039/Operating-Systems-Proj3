@@ -1,0 +1,36 @@
+/*
+*problem2_explanation.txt
+*Qiaoyu Liao qliao@wpi.edu
+*Ying LU ylu6@wpi.edu
+*/
+
+============================================================
+PHASE 1
+============================================================
+When two vehicles arrives at the same intersection, the one 
+arrives first gets to proceed. It then down the binary 
+semaphore for the region, and the other who arrives later 
+should wait until the binary somaphore to be non-zero, which 
+would occur when the first vehicle leaves the region and up
+the semaphore. Thus one car is blocked when the other car
+occupies the region.
+
+This way can be suboptimal when the first car "broke down" in
+the region, which will lead to the situation, under which
+the region can never be vacant. The other car would wait for
+ever for the first car because it cannot turn back. It could
+be improved though, by limiting the usage time of each car.
+In this way, if the first car is broken and cannot be fixed 
+within a certain amount of time, it gets towed so that the 
+next car can get a chance to use that region.
+
+
+=============================================================
+PHASE 2
+=============================================================
+When cars in all four of the regions are not turning right
+can deadlock presents. The solution to this awkward situation
+is not to assign the fourth car who is not going to make a 
+right turn when it knows the cars in other three regions are
+not simply turning right. To do this, we need the help of 
+semaphores to avoid race conditions. 
